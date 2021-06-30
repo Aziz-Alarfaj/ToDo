@@ -9,7 +9,7 @@
                 list-style: none;
                 padding: 0;
                 margin: 0;
-                width: 200px;
+                width: 300px;
             }
 
             li {
@@ -25,18 +25,31 @@
                 cursor: pointer;
                 font-size: 20px;
             }
+
         </style>
     </head>
     <body>
+
+        <ul id="list" style="list-style: square; margin: 20 10 20 10;">
+            {% for list in lists %}
+            <li>
+                <a href="/lists/{{ list.id }}">
+                {{ list.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h4>{{ active_list.name }}</h4>
         <form id="form">
             <input type="text" id="description" name="description">
             <input type="submit" value="Create"> 
         </form>
         <div id="error" class="hidden"">Somthing went wrong</div>
         <ul id="todos">
-            {% for d in data %}
-            <li> <input class="check-completed" data-id="{{ d.id }}" type="checkbox" {% if d.completed %} checked 
-            {% endif %}>{{ d.description }} <button class="delete-todo" data-id="{{ d.id }}">&cross;</button>
+            {% for todo in todos %}
+            <li> <input class="check-completed" data-id="{{ todo.id }}" type="checkbox" {% if todo.completed %} checked 
+            {% endif %}>{{ todo.description }} <button class="delete-todo" data-id="{{ todo.id }}">&cross;</button>
             </li>
             {% endfor %}
         </ul>
